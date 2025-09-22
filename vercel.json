@@ -3,6 +3,11 @@
   "buildCommand": "npm run build",
   "outputDirectory": "out",
   "installCommand": "npm install",
+  "functions": {
+    "out/**/*.html": {
+      "runtime": "nodejs18.x"
+    }
+  },
   "headers": [
     {
       "source": "/(.*)",
