@@ -148,15 +148,15 @@ export default function DiffViewer({ fromVersion, toVersion, selectedFile, repos
   return (
     <div className="space-y-4">
       {/* Header */}
-      <div className="bg-gray-900 text-white p-4 rounded-t-lg">
+      <div className="bg-gray-900 dark:bg-gray-800 text-white dark:text-gray-100 p-4 rounded-t-lg">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <FileText className="h-5 w-5" />
-            <span className="font-mono text-sm">{diff.file}</span>
+            <FileText className="h-5 w-5 text-white dark:text-gray-100" />
+            <span className="font-mono text-sm text-white dark:text-gray-100">{diff.file}</span>
           </div>
           <div className="flex items-center space-x-4 text-sm">
-            <span className="text-green-400">+{diff.stats.additions}</span>
-            <span className="text-red-400">-{diff.stats.deletions}</span>
+            <span className="text-green-400 dark:text-green-300">+{diff.stats.additions}</span>
+            <span className="text-red-400 dark:text-red-300">-{diff.stats.deletions}</span>
           </div>
         </div>
       </div>
