@@ -56,24 +56,24 @@ export function useGitHub(token?: string): UseGitHubReturn {
         fromVersion: actualFromVersion,
         toVersion: actualToVersion,
         commits: comparison.commits.map(commit => ({
-          hash: commit.sha.substring(0, 7),
-          message: commit.commit.message,
-          date: commit.commit.author.date,
-          author: commit.author.login || commit.commit.author.name
+          hash: commit.sha?.substring(0, 7) || 'unknown',
+          message: commit.commit?.message || 'No message',
+          date: commit.commit?.author?.date || new Date().toISOString(),
+          author: commit.author?.login || commit.commit?.author?.name || 'Unknown'
         })),
         files: comparison.files.map(file => ({
-          file: file.filename,
-          changes: file.changes,
-          insertions: file.additions,
-          deletions: file.deletions,
-          status: file.status,
-          patch: file.patch
+          file: file.filename || 'unknown',
+          changes: file.changes || 0,
+          insertions: file.additions || 0,
+          deletions: file.deletions || 0,
+          status: file.status || 'unknown',
+          patch: file.patch || ''
         })),
         stats: {
-          commits: comparison.commits.length,
-          filesChanged: comparison.files.length,
-          insertions: comparison.files.reduce((sum, file) => sum + file.additions, 0),
-          deletions: comparison.files.reduce((sum, file) => sum + file.deletions, 0)
+          commits: comparison.commits?.length || 0,
+          filesChanged: comparison.files?.length || 0,
+          insertions: comparison.files?.reduce((sum, file) => sum + (file.additions || 0), 0) || 0,
+          deletions: comparison.files?.reduce((sum, file) => sum + (file.deletions || 0), 0) || 0
         },
         repository: { owner, repo }
       };
