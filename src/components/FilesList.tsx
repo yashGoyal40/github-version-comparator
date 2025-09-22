@@ -70,7 +70,7 @@ export default function FilesList({ files, onFileSelect }: FilesListProps) {
           return (
             <div
               key={index}
-              className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200 cursor-pointer group"
+              className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200 cursor-pointer group"
               onClick={() => onFileSelect(file.file)}
             >
               <div className="flex items-center justify-between">

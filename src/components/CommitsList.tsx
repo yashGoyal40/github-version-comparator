@@ -38,7 +38,7 @@ export default function CommitsList({ commits }: CommitsListProps) {
         {commits.map((commit, index) => (
           <div
             key={commit.hash}
-            className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
+            className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
           >
             <div className="flex items-start space-x-4">
               <div className="flex-shrink-0">
