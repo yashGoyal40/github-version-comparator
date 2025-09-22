@@ -44,18 +44,12 @@ export function useGitHub(token?: string): UseGitHubReturn {
     setError(null);
     
     try {
-      console.log('🔍 Comparing versions:', { owner, repo, base, head });
       const comparison = await github.compareVersions(owner, repo, base, head);
-      console.log('📊 Raw comparison data:', comparison);
       
       // Check if we need to swap the versions based on the comparison result
       const shouldSwap = comparison.commits.length === 0 && comparison.files.length === 0;
       const actualFromVersion = shouldSwap ? head : base;
       const actualToVersion = shouldSwap ? base : head;
-      
-      if (shouldSwap) {
-        console.log('🔄 Swapped versions in display:', { from: actualFromVersion, to: actualToVersion });
-      }
       
       // Transform to our expected format
       const result = {
@@ -84,11 +78,9 @@ export function useGitHub(token?: string): UseGitHubReturn {
         repository: { owner, repo }
       };
       
-      console.log('✅ Transformed result:', result);
       setLoading(false);
       return result;
     } catch (err) {
-      console.error('❌ Error in compareVersions:', err);
       handleError(err);
       throw err;
     }

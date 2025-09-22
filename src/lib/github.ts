@@ -60,14 +60,10 @@ class GitHubAPI {
       headers['Authorization'] = `token ${this.token}`;
     }
 
-    console.log('🌐 Making GitHub API request:', { url, hasToken: !!this.token });
-
     const response = await fetch(url, { 
       headers,
       method: 'GET'
     });
-
-    console.log('📡 GitHub API response:', { status: response.status, ok: response.ok });
 
     if (!response.ok) {
       const error = await response.json().catch(() => ({ message: 'Unknown error' }));
@@ -93,9 +89,7 @@ class GitHubAPI {
       throw new Error(`GitHub API Error: ${response.status} - ${error.message}`);
     }
 
-    const data = await response.json();
-    console.log('✅ GitHub API success response:', data);
-    return data;
+    return response.json();
   }
 
   async getVersions(owner: string, repo: string): Promise<string[]> {
@@ -110,25 +104,19 @@ class GitHubAPI {
 
   async compareVersions(owner: string, repo: string, base: string, head: string): Promise<GitHubComparison> {
     try {
-      console.log('🔍 GitHub API: Comparing versions', { owner, repo, base, head });
-      
       // Try the original order first
       let endpoint = `/repos/${owner}/${repo}/compare/${base}...${head}`;
-      console.log('🔗 GitHub API endpoint (original):', endpoint);
       let comparison = await this.request<GitHubComparison>(endpoint);
       
       // If no commits found, try swapping the versions
       if (comparison.commits.length === 0 && comparison.files.length === 0) {
-        console.log('🔄 No changes found, trying reversed order...');
         endpoint = `/repos/${owner}/${repo}/compare/${head}...${base}`;
-        console.log('🔗 GitHub API endpoint (reversed):', endpoint);
         comparison = await this.request<GitHubComparison>(endpoint);
       }
       
-      console.log('📊 GitHub API: Raw comparison response', comparison);
       return comparison;
     } catch (error) {
-      console.error('❌ GitHub API: Error comparing versions:', error);
+      console.error('Error comparing versions:', error);
       throw error;
     }
   }

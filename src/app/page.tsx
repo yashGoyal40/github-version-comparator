@@ -100,15 +100,13 @@ export default function Home() {
   const handleCompareVersions = async () => {
     if (!fromVersion || !toVersion || fromVersion === toVersion || !repository) return;
 
-    console.log('🚀 Starting comparison:', { fromVersion, toVersion, repository });
     setComparison(null);
 
     try {
       const result = await compareVersions(repository.owner, repository.name, fromVersion, toVersion);
-      console.log('✅ Comparison result received:', result);
       setComparison(result);
     } catch (err) {
-      console.error('❌ Error comparing versions:', err);
+      console.error('Error comparing versions:', err);
       // Error is already set by the hook
     }
   };
