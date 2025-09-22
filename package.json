@@ -1,7 +1,30 @@
 {
   "name": "github-version-comparator",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
+  "description": "A modern, client-side GitHub version comparator with Docker & Kubernetes support. Compare any repository versions with beautiful diffs, commit history, and file changes.",
+  "keywords": [
+    "github",
+    "version-comparison",
+    "diff",
+    "git",
+    "docker",
+    "kubernetes",
+    "nextjs",
+    "typescript",
+    "client-side",
+    "static-hosting"
+  ],
+  "author": "yashGoyal40",
+  "license": "MIT",
+  "homepage": "https://github.com/yashGoyal40/github-version-comparator#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yashGoyal40/github-version-comparator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yashGoyal40/github-version-comparator/issues"
+  },
+  "private": false,
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
@@ -9,7 +32,11 @@
     "lint": "eslint",
     "lint:fix": "eslint --fix",
     "type-check": "tsc --noEmit",
-    "deploy": "vercel --prod"
+    "deploy": "vercel --prod",
+    "version:patch": "npm version patch && git push --follow-tags",
+    "version:minor": "npm version minor && git push --follow-tags",
+    "version:major": "npm version major && git push --follow-tags",
+    "release": "npm run build && npm run deploy"
   },
   "dependencies": {
     "autoprefixer": "^10.4.21",

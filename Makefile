@@ -26,6 +26,7 @@ help:
 	@echo "  install      Install dependencies"
 	@echo "  lint         Run linter"
 	@echo "  test         Run tests"
+	@echo "  release      Create a new release"
 
 # Development
 dev:
@@ -51,6 +52,10 @@ lint:
 test:
 	@echo "🧪 Running tests..."
 	npm run test
+
+release:
+	@echo "🚀 Creating release..."
+	./scripts/release.sh
 
 # Docker
 docker-build:
