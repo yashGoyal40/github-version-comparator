@@ -1,5 +1,5 @@
 {
-  "name": "sx-go-utils-version-comparator",
+  "name": "github-version-comparator",
   "version": "0.1.0",
   "private": true,
   "scripts": {

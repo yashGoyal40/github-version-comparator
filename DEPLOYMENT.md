@@ -1,6 +1,6 @@
 # 🚀 Deployment Guide
 
-This guide covers different deployment options for the sx-go-utils Version Comparator.
+This guide covers different deployment options for the GitHub Version Comparator.
 
 ## 📋 Prerequisites
 
@@ -27,7 +27,7 @@ This guide covers different deployment options for the sx-go-utils Version Compa
 
 3. **Configure Environment Variables**
    - In Vercel dashboard, go to Settings → Environment Variables
-   - Add: `REPO_PATH` = `/path/to/your/sx-go-utils`
+   - Add: `REPO_PATH` = `/path/to/your/repository`
    - Add: `NODE_ENV` = `production`
 
 4. **Deploy**
@@ -84,7 +84,7 @@ This guide covers different deployment options for the sx-go-utils Version Compa
 ### Required Variables
 
 ```bash
-REPO_PATH=/path/to/your/sx-go-utils
+REPO_PATH=/path/to/your/repository
 ```
 
 ### Optional Variables
@@ -119,8 +119,8 @@ CMD ["npm", "start"]
 ### Build and Run
 
 ```bash
-docker build -t sx-go-utils-comparator .
-docker run -p 3000:3000 -e REPO_PATH=/path/to/repo sx-go-utils-comparator
+docker build -t github-version-comparator .
+docker run -p 3000:3000 -e REPO_PATH=/path/to/repo github-version-comparator
 ```
 
 ## 🔒 Security Considerations

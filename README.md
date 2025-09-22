@@ -2,6 +2,8 @@
 
 A modern, interactive web application for comparing different versions of any GitHub repository. Built with Next.js 15, TypeScript, and Tailwind CSS.
 
+**Perfect for any GitHub repository** - whether it's React, Vue, Angular, Go, Python, or any other language!
+
 ## ✨ Features
 
 - **🔍 Version Comparison**: Compare any two versions of any GitHub repository
@@ -54,7 +56,7 @@ This application uses a **client-side only architecture** that provides several 
 1. **Clone the repository**
    ```bash
    git clone <your-repo-url>
-   cd sx-go-utils-version-comparator
+   cd github-version-comparator
    ```
 
 2. **Install dependencies**

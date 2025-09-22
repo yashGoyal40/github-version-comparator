@@ -12,6 +12,6 @@
     }
   },
   "env": {
-    "REPO_PATH": "/Users/yashgoyal/repos/spx/sx-go-utils"
+    "REPO_PATH": "/path/to/your/repository"
   }
 }
