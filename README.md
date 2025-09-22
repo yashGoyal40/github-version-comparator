@@ -196,37 +196,36 @@ React Components (Display Data)
 
 Since this is a **client-side only application**, it can be deployed to any static hosting platform:
 
-### Vercel (Recommended)
+### Quick Deploy Options
 
-1. **Connect your repository** to Vercel
-2. **Deploy** - No environment variables needed!
-
+**Static Hosting (Easiest):**
 ```bash
-# Install Vercel CLI
-npm i -g vercel
+# Vercel
+npm i -g vercel && vercel --prod
 
-# Deploy
-vercel --prod
-```
-
-### Other Platforms
-
-The app can be deployed to any static hosting platform:
-- **Netlify** - Drag & drop or Git integration
-- **GitHub Pages** - Free hosting for public repos
-- **AWS S3 + CloudFront** - Scalable static hosting
-- **DigitalOcean App Platform** - Simple deployment
-- **Firebase Hosting** - Google's static hosting
-
-### Build for Production
-
-```bash
-# Build the application
+# Build for any static host
 npm run build
-
-# The output will be in the 'out' directory
-# Deploy the 'out' directory to any static host
 ```
+
+**Docker & Kubernetes:**
+```bash
+# Docker
+make docker-build && make docker-run
+
+# Kubernetes
+make k8s-deploy
+```
+
+**📖 For detailed deployment instructions, see [DEPLOYMENT.md](./DEPLOYMENT.md)**
+
+### Supported Platforms
+
+- **Vercel** - Zero config deployment
+- **Netlify** - Drag & drop or Git integration  
+- **GitHub Pages** - Free hosting for public repos
+- **AWS S3 + CloudFront** - Enterprise scale
+- **Docker** - Self-hosted containers
+- **Kubernetes** - Production orchestration
 
 ## 🔒 Security & Privacy
 
