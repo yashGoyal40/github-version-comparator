@@ -30,9 +30,12 @@ export const metadata: Metadata = {
     description: "Compare any GitHub repository versions with beautiful diffs, commit history, and file changes.",
   },
   icons: {
-    icon: "/favicon.ico",
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico", sizes: "any" }
+    ],
     shortcut: "/favicon.ico",
-    apple: "/favicon.ico",
+    apple: "/favicon.svg",
   },
 };
 
