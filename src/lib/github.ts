@@ -60,18 +60,44 @@ class GitHubAPI {
       headers['Authorization'] = `token ${this.token}`;
     }
 
+    console.log('🔍 Making GitHub API request:', { url, hasToken: !!this.token });
+
     const response = await fetch(url, { 
       headers,
       method: 'GET'
     });
 
+    console.log('📡 GitHub API response:', { 
+      status: response.status, 
+      statusText: response.statusText,
+      ok: response.ok 
+    });
+
     if (!response.ok) {
-      const error = await response.json().catch(() => ({ message: 'Unknown error' }));
-      console.error('❌ GitHub API error response:', error);
+      let errorMessage = 'Unknown error';
+      let errorDetails = {};
+      
+      try {
+        const error = await response.json();
+        errorDetails = error;
+        errorMessage = error.message || error.error || `HTTP ${response.status}`;
+      } catch {
+        // If JSON parsing fails, use status text
+        errorMessage = response.statusText || `HTTP ${response.status}`;
+      }
+      
+      console.error('❌ GitHub API error response:', {
+        status: response.status,
+        statusText: response.statusText,
+        error: errorDetails
+      });
       
       // Handle specific GitHub API errors
-      if (response.status === 403 && error.message?.includes('rate limit')) {
-        throw new Error('GitHub API rate limit exceeded. Please wait before making more requests or add a GitHub token for higher limits.');
+      if (response.status === 403) {
+        if (errorMessage.includes('rate limit') || errorMessage.includes('API rate limit')) {
+          throw new Error('GitHub API rate limit exceeded. Please wait before making more requests or add a GitHub token for higher limits.');
+        }
+        throw new Error('Access denied. This repository may be private or you may not have permission to access it.');
       }
       
       if (response.status === 401) {
@@ -79,14 +105,14 @@ class GitHubAPI {
       }
       
       if (response.status === 404) {
-        throw new Error('Repository not found or not accessible. This might be a private repository that requires authentication.');
+        throw new Error('Repository not found. Please check the repository URL and ensure it exists and is accessible.');
       }
       
-      if (response.status === 403) {
-        throw new Error('Access denied. This repository requires authentication or you do not have permission to access it.');
+      if (response.status === 422) {
+        throw new Error('Invalid request. Please check the repository URL format.');
       }
-
-      throw new Error(`GitHub API Error: ${response.status} - ${error.message}`);
+      
+      throw new Error(`GitHub API error: ${errorMessage}`);
     }
 
     return response.json();
