@@ -1,6 +1,7 @@
 'use client';
 
 import { Github, GitBranch, BarChart3, FileText, Eye, Zap } from 'lucide-react';
+import Logo from './Logo';
 
 export default function LandingPage() {
   const features = [
@@ -49,8 +50,11 @@ export default function LandingPage() {
     <div className="space-y-12">
       {/* Hero Section */}
       <div className="text-center py-12">
-        <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 dark:bg-blue-900/30 rounded-full mb-6">
-          <Github className="h-8 w-8 text-blue-600 dark:text-blue-400" />
+        <div className="flex items-center justify-center mb-6">
+          <Logo size="lg" className="mr-3" />
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 dark:bg-blue-900/30 rounded-full">
+            <Github className="h-8 w-8 text-blue-600 dark:text-blue-400" />
+          </div>
         </div>
         <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
           Welcome to GitHub Version Comparator

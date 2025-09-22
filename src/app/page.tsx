@@ -11,6 +11,7 @@ import DiffViewer from '@/components/DiffViewer';
 import Overview from '@/components/Overview';
 import LandingPage from '@/components/LandingPage';
 import DarkModeToggle from '@/components/DarkModeToggle';
+import Logo from '@/components/Logo';
 import { useGitHub } from '@/hooks/useGitHub';
 
 interface Commit {
@@ -129,9 +130,12 @@ export default function Home() {
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">
-            🚀 GitHub Version Comparator
-          </h1>
+          <div className="flex items-center justify-center mb-4">
+            <Logo size="lg" className="mr-4" />
+            <h1 className="text-4xl font-bold text-gray-900 dark:text-white">
+              GitHub Version Comparator
+            </h1>
+          </div>
           <p className="text-lg text-gray-600 dark:text-gray-300">
             Compare different versions and visualize changes in any GitHub repository
           </p>
