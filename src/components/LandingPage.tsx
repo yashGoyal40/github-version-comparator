@@ -113,7 +113,7 @@ export default function LandingPage() {
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="text-center">
-            <div className="inline-flex items-center justify-center w-12 h-12 bg-blue-600 text-white rounded-full mb-4">
+            <div className="inline-flex items-center justify-center w-12 h-12 bg-blue-600 dark:bg-blue-500 text-white rounded-full mb-4 shadow-lg">
               <span className="text-lg font-bold">1</span>
             </div>
             <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Enter Repository URL</h4>
@@ -122,7 +122,7 @@ export default function LandingPage() {
             </p>
           </div>
           <div className="text-center">
-            <div className="inline-flex items-center justify-center w-12 h-12 bg-blue-600 text-white rounded-full mb-4">
+            <div className="inline-flex items-center justify-center w-12 h-12 bg-blue-600 dark:bg-blue-500 text-white rounded-full mb-4 shadow-lg">
               <span className="text-lg font-bold">2</span>
             </div>
             <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Select Versions</h4>
@@ -131,7 +131,7 @@ export default function LandingPage() {
             </p>
           </div>
           <div className="text-center">
-            <div className="inline-flex items-center justify-center w-12 h-12 bg-blue-600 text-white rounded-full mb-4">
+            <div className="inline-flex items-center justify-center w-12 h-12 bg-blue-600 dark:bg-blue-500 text-white rounded-full mb-4 shadow-lg">
               <span className="text-lg font-bold">3</span>
             </div>
             <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Explore Changes</h4>
@@ -143,19 +143,19 @@ export default function LandingPage() {
       </div>
 
       {/* GitHub Token Info */}
-      <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-6">
+      <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-6">
         <div className="flex items-start space-x-3">
-          <Zap className="h-5 w-5 text-yellow-600 mt-0.5" />
+          <Zap className="h-5 w-5 text-yellow-600 dark:text-yellow-400 mt-0.5" />
           <div>
-            <h4 className="font-semibold text-yellow-800 mb-2">GitHub Token (Optional)</h4>
-            <p className="text-sm text-yellow-700 mb-3">
+            <h4 className="font-semibold text-yellow-800 dark:text-yellow-200 mb-2">GitHub Token (Optional)</h4>
+            <p className="text-sm text-yellow-700 dark:text-yellow-300 mb-3">
               For private repositories or higher rate limits, you can provide a GitHub personal access token.
             </p>
             <a
               href="https://github.com/settings/tokens"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm text-yellow-800 hover:text-yellow-900 underline"
+              className="text-sm text-yellow-800 dark:text-yellow-200 hover:text-yellow-900 dark:hover:text-yellow-100 underline"
             >
               Generate a token here →
             </a>
