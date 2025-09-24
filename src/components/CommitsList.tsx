@@ -1,6 +1,8 @@
 'use client';
 
-import { GitCommit, User, Calendar } from 'lucide-react';
+import { useState } from 'react';
+import { GitCommit, User, Calendar, Eye } from 'lucide-react';
+import CommitDetailModal from './CommitDetailModal';
 
 interface Commit {
   hash: string;
@@ -11,9 +13,17 @@ interface Commit {
 
 interface CommitsListProps {
   commits: Commit[];
+  repository: {
+    owner: string;
+    repo: string;
+  };
+  token?: string;
 }
 
-export default function CommitsList({ commits }: CommitsListProps) {
+export default function CommitsList({ commits, repository, token }: CommitsListProps) {
+  const [selectedCommit, setSelectedCommit] = useState<Commit | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', {
@@ -23,6 +33,16 @@ export default function CommitsList({ commits }: CommitsListProps) {
       hour: '2-digit',
       minute: '2-digit'
     });
+  };
+
+  const handleCommitClick = (commit: Commit) => {
+    setSelectedCommit(commit);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedCommit(null);
   };
 
   return (
@@ -38,7 +58,8 @@ export default function CommitsList({ commits }: CommitsListProps) {
         {commits.map((commit, index) => (
           <div
             key={commit.hash}
-            className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
+            className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200 cursor-pointer group"
+            onClick={() => handleCommitClick(commit)}
           >
             <div className="flex items-start space-x-4">
               <div className="flex-shrink-0">
@@ -68,6 +89,10 @@ export default function CommitsList({ commits }: CommitsListProps) {
                   {commit.message}
                 </p>
               </div>
+
+              <div className="flex-shrink-0 ml-4">
+                <Eye className="h-4 w-4 text-gray-400 dark:text-gray-500 group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-colors" />
+              </div>
             </div>
           </div>
         ))}
@@ -79,6 +104,21 @@ export default function CommitsList({ commits }: CommitsListProps) {
           <p>No commits found between these versions</p>
         </div>
       )}
+
+      {/* Commit Detail Modal */}
+      <CommitDetailModal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        commit={selectedCommit ? {
+          hash: selectedCommit.hash,
+          message: selectedCommit.message,
+          date: selectedCommit.date,
+          author: selectedCommit.author,
+          files: [] // This will be populated by the modal when it fetches commit details
+        } : null}
+        repository={repository}
+        token={token}
+      />
     </div>
   );
 }

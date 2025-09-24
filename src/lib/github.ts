@@ -163,6 +163,27 @@ class GitHubAPI {
     }
   }
 
+  async getCommitDiff(owner: string, repo: string, commitSha: string, filename: string): Promise<string> {
+    try {
+      // Get the commit details first
+      const commit = await this.request<{
+        sha: string;
+        files: GitHubFileChange[];
+      }>(`/repos/${owner}/${repo}/commits/${commitSha}`);
+      
+      const file = commit.files.find(f => f.filename === filename);
+      
+      if (!file) {
+        throw new Error('File not found in commit');
+      }
+
+      return file.patch || '';
+    } catch (error) {
+      console.error('Error fetching commit diff:', error);
+      throw error;
+    }
+  }
+
   // Check if token is valid
   async validateToken(): Promise<boolean> {
     if (!this.token) return false;

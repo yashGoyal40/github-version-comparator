@@ -10,6 +10,7 @@ export interface UseGitHubReturn {
   getVersions: (owner: string, repo: string) => Promise<string[]>;
   compareVersions: (owner: string, repo: string, base: string, head: string) => Promise<any>;
   getFileDiff: (owner: string, repo: string, base: string, head: string, filename: string) => Promise<string>;
+  getCommitDiff: (owner: string, repo: string, commitSha: string, filename: string) => Promise<string>;
   validateToken: () => Promise<boolean>;
 }
 
@@ -100,6 +101,20 @@ export function useGitHub(token?: string): UseGitHubReturn {
     }
   }, [github]);
 
+  const getCommitDiff = useCallback(async (owner: string, repo: string, commitSha: string, filename: string): Promise<string> => {
+    setLoading(true);
+    setError(null);
+    
+    try {
+      const diff = await github.getCommitDiff(owner, repo, commitSha, filename);
+      setLoading(false);
+      return diff;
+    } catch (err) {
+      handleError(err);
+      throw err;
+    }
+  }, [github]);
+
   const validateToken = useCallback(async (): Promise<boolean> => {
     try {
       return await github.validateToken();
@@ -114,6 +129,7 @@ export function useGitHub(token?: string): UseGitHubReturn {
     getVersions,
     compareVersions,
     getFileDiff,
+    getCommitDiff,
     validateToken
   };
 }

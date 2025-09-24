@@ -225,7 +225,11 @@ export default function Home() {
                 />
               )}
               {activeTab === 'commits' && (
-                <CommitsList commits={comparison.commits} />
+                <CommitsList 
+                  commits={comparison.commits} 
+                  repository={comparison.repository}
+                  token={token}
+                />
               )}
               {activeTab === 'files' && (
                 <FilesList
